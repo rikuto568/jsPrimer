@@ -1,1 +1,1 @@
-console.log(1 + 1);
+console.log("index.js:loaded");
