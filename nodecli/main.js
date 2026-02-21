@@ -1,6 +1,6 @@
 import * as util from "node:util";
 import * as fs from "node:fs/promises";
-import { marked } from "marked";
+import { md2html } from "./md2html";
 
 const { values, positionals } = util.parseArgs({
   allowPositionals: true,
@@ -15,8 +15,8 @@ const filePath = positionals[0];
 // ファイルをUTF-8として非同期で読み込む
 fs.readFile(filePath, { encoding: "utf8" })
   .then((file) => {
-    const html = marked.parse(file, {
-      gfm: values.jfm,
+    const html = md2html(file, {
+      gfm: values.gfm,
     });
     console.log(html);
   })
