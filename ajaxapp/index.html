@@ -6,8 +6,10 @@
   </head>
   <body>
     <h2>GitHub User Info</h2>
-    <button onclick="fetchUserInfo(`js-primer-example`)">Get user info</button>
+    <input id="userId" type="text" value="" />
+    <button onclick="main()">Get user info</button>
     <!-- `js-primer-example` これは学習用のサンプルユーザー名だから気にしなくていい -->
+    <div id="result"></div>
     <script src="index.js"></script>
   </body>
 </html>
