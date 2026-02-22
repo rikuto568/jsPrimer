@@ -1,5 +1,3 @@
-import { EventEmitter } from "../EventEmitter.js";
-
 export class TodoListModel extends EventEmitter {
   #items;
   /**
@@ -47,6 +45,35 @@ export class TodoListModel extends EventEmitter {
    */
   addTodo(todoItem) {
     this.#items.push(todoItem);
+    this.emitChange();
+  }
+
+  /**
+   * 指定した`id`のTodoItemの`completed`を更新する
+   * @param {{ id:number, completed: boolean }}
+   */
+  updateTodo({ id, completed }) {
+    const todoItem = this.#items.find((todo) => todo.id === id);
+    if (!todoItem) {
+      return;
+    }
+    todoItem.completed = completed;
+    this.emitChange();
+  }
+
+  //! [add-point]
+  // ===============================
+  // TodoListModel.jsの既存の実装は省略
+  // ===============================
+  /**
+   * 指定したidのTodoItemを削除する
+   * @param {{ id: number }}
+   */
+  deleteTodo({ id }) {
+    // `id`に一致しないTodoItemだけを残すことで、`id`に一致するTodoItemを削除する
+    this.#items = this.#items.filter((todo) => {
+      return todo.id !== id;
+    });
     this.emitChange();
   }
 }
